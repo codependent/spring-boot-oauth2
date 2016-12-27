@@ -1,50 +1,26 @@
 package com.codependent.oauth2.client.security
 
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.beans.factory.annotation.Value
-import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.security.oauth2.client.DefaultOAuth2ClientContext
-import org.springframework.security.oauth2.client.OAuth2ClientContext
-import org.springframework.security.oauth2.client.OAuth2RestOperations
-import org.springframework.security.oauth2.client.OAuth2RestTemplate
-import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails
-import org.springframework.security.oauth2.client.token.AccessTokenRequest
-import org.springframework.security.oauth2.client.token.DefaultAccessTokenRequest
-import org.springframework.security.oauth2.client.token.grant.password.ResourceOwnerPasswordResourceDetails
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
+import org.springframework.security.config.annotation.web.builders.HttpSecurity
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 
 @Configuration
-class SecurityConfig {
-
-	@Value('${oauth.resource:http://localhost:8082}')
-	private String baseUrl
-	
-	@Value('${oauth.authorize:http://localhost:8082/oauth/authorize}')
-	private String authorizeUrl
-	
-	@Value('${oauth.token:http://localhost:8082/oauth/token}')
-	private String tokenUrl
+class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
-	private OAuth2ClientContext oauth2Context
-	
-	@Bean
-	OAuth2ProtectedResourceDetails resource() {
-		ResourceOwnerPasswordResourceDetails resource = new ResourceOwnerPasswordResourceDetails()
-		List scopes = ['write', 'add']
-		resource.setAccessTokenUri(tokenUrl)
-		resource.setClientId("restapp")
-		resource.setClientSecret("restapp")
-		resource.setGrantType("password")
-		resource.setScope(scopes)
-		resource.setUsername("**USERNAME**")
-		resource.setPassword("**PASSWORD**")
-		resource
+	public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
+		auth.inMemoryAuthentication().withUser("jose").password("mypassword").roles('USER')
 	}
-
-	@Bean
-	OAuth2RestOperations restTemplate() {
-		new OAuth2RestTemplate(resource(), oauth2Context)
+	
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.csrf().disable()
+		.authorizeRequests()
+		.anyRequest().hasRole('USER')
+		.and()
+		.formLogin()
 	}
 	
 }
