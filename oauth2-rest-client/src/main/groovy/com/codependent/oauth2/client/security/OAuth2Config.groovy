@@ -31,14 +31,14 @@ class OAuth2Config {
 	@Bean
 	OAuth2ProtectedResourceDetails resource() {
 		ResourceOwnerPasswordResourceDetails resource = new ResourceOwnerPasswordResourceDetails()
-		resource.setClientAuthenticationScheme(AuthenticationScheme.query)
+		resource.setClientAuthenticationScheme(AuthenticationScheme.header)
 		resource.setAccessTokenUri(tokenUrl)
-		resource.setClientId("95508582-cfbb-aaaa-a244-3cec65c86aaa")
-		//resource.setClientSecret("restapp")
+		resource.setClientId("trustedclient")
+		resource.setClientSecret("trustedclientsecret")
 		resource.setGrantType("password")
-		resource.setScope(['view', 'operate'])
-		resource.setUsername("USERNAME")
-		resource.setPassword("PASSWORD")
+		resource.setScope(['read'])
+		resource.setUsername("user")
+		resource.setPassword("cec31d99-e5ee-4f1d-b9a3-8d16d0c6eeb5")
 		resource
 	}
 
