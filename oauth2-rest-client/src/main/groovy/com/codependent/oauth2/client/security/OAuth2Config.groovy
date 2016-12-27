@@ -33,12 +33,12 @@ class OAuth2Config {
 		ResourceOwnerPasswordResourceDetails resource = new ResourceOwnerPasswordResourceDetails()
 		resource.setClientAuthenticationScheme(AuthenticationScheme.header)
 		resource.setAccessTokenUri(tokenUrl)
-		resource.setClientId("trustedclient")
+		resource.setClientId("trustedclientid")
 		resource.setClientSecret("trustedclientsecret")
 		resource.setGrantType("password")
 		resource.setScope(['read'])
-		resource.setUsername("user")
-		resource.setPassword("cec31d99-e5ee-4f1d-b9a3-8d16d0c6eeb5")
+		resource.setUsername("jose")
+		resource.setPassword("mypassword")
 		resource
 	}
 
