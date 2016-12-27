@@ -1,5 +1,0 @@
-logging:
-  level:
-    org.springframework.web.client: TRACE
-    org.springframework.http.client: TRACE
-    org.springframework.security: DEBUG
