@@ -24,7 +24,7 @@ class OAuth2Config extends AuthorizationServerConfigurerAdapter{
 	@Bean
 	public UserDetailsService userDetailsService() throws Exception {
 		InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager([])
-		manager.createUser(new User("jose","mypassword", [new SimpleGrantedAuthority("USER")]))
+		manager.createUser(new User("jose","mypassword", [new SimpleGrantedAuthority("ROLE_USER")]))
 		return manager
 	}
 	
@@ -42,10 +42,17 @@ class OAuth2Config extends AuthorizationServerConfigurerAdapter{
 			.secret("trustedclientsecret")
             .authorizedGrantTypes("password")
             .authorities("ROLE_USER")
-            .scopes("read", "write")
+            .scopes("read")
             .accessTokenValiditySeconds(60)
+		.and()
+		.withClient("untrustedclientid")
+			.secret("untrustedclientsecret")
+			.authorizedGrantTypes("authorization_code", "implicit")
+			.authorities("ROLE_USER")
+			.scopes("read", "write")
+			.accessTokenValiditySeconds(60)
 	    .and()
-			.withClient("usersResourceProvider")
+		.withClient("usersResourceProvider")
 			.secret("usersResourceProviderSecret")
 			.authorities("ROLE_RESOURCE_PROVIDER")
 	
