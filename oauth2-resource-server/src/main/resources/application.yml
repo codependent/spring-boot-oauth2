@@ -1,0 +1,13 @@
+server:
+  port: 8081
+  
+security:
+  oauth2:
+    resource:
+      token-info-uri: http://localhost:8082/oauth/check_token
+
+logging:
+  level:
+    org.springframework.web.client: TRACE
+    org.springframework.http.client: TRACE
+    org.springframework.security: DEBUG

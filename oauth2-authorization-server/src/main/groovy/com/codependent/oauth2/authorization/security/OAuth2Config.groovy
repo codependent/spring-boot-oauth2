@@ -1,4 +1,4 @@
-package com.codependent.oauth2.security
+package com.codependent.oauth2.authorization.security
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer
+import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore
 import org.springframework.security.provisioning.InMemoryUserDetailsManager
@@ -44,11 +45,20 @@ class OAuth2Config extends AuthorizationServerConfigurerAdapter{
             .scopes("read", "write")
             .accessTokenValiditySeconds(60)
 	    .and()
+			.withClient("usersResourceProvider")
+			.secret("usersResourceProviderSecret")
+			.authorities("ROLE_RESOURCE_PROVIDER")
+	
 	}
 	
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints)	throws Exception {
 		endpoints.authenticationManager(this.authenticationManager);
+	}
+	
+	@Override
+	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+		security.checkTokenAccess('hasRole("ROLE_RESOURCE_PROVIDER")')
 	}
 
 }
