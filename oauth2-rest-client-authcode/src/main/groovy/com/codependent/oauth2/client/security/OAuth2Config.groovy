@@ -38,7 +38,7 @@ class OAuth2Config {
 		resource.setClientId("untrustedclientid")
 		resource.setClientSecret("untrustedclientsecret")
 		resource.setGrantType("authorization_code")
-		resource.setScope(['read'])
+		resource.setScope(['read', 'write'])
 		resource.setPreEstablishedRedirectUri("http://localhost:8080/client/redirect")
 		resource
 	}

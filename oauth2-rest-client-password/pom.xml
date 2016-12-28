@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.codependent.oauth2</groupId>
-	<artifactId>oauth2-authcode-rest-client</artifactId>
+	<artifactId>oauth2-rest-client-password</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
