@@ -25,6 +25,7 @@ class OAuth2Config extends AuthorizationServerConfigurerAdapter{
 	public UserDetailsService userDetailsService() throws Exception {
 		InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager([])
 		manager.createUser(new User("jose","mypassword", [new SimpleGrantedAuthority("ROLE_USER")]))
+		manager.createUser(new User("themostuntrustedclientid","themostuntrustedclientsecret", [new SimpleGrantedAuthority("ROLE_USER")]))
 		return manager
 	}
 	
@@ -72,7 +73,8 @@ class OAuth2Config extends AuthorizationServerConfigurerAdapter{
 	
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-		security.checkTokenAccess('hasRole("ROLE_RESOURCE_PROVIDER")')
+		//security.checkTokenAccess('hasRole("ROLE_RESOURCE_PROVIDER")')
+		security.checkTokenAccess('isAuthenticated()')
 	}
 
 }

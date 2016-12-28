@@ -34,7 +34,7 @@ class OAuth2Config {
 		AuthorizationCodeResourceDetails resource = new AuthorizationCodeResourceDetails()
 		resource.setAuthenticationScheme(AuthenticationScheme.header)
 		resource.setAccessTokenUri(tokenUrl)
-		resource.setUserAuthorizationUri(authorizeUrl);
+		resource.setUserAuthorizationUri(authorizeUrl)
 		resource.setClientId("untrustedclientid")
 		resource.setClientSecret("untrustedclientsecret")
 		resource.setGrantType("authorization_code")

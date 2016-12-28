@@ -30,13 +30,10 @@ class OAuth2Config {
 		ImplicitResourceDetails resource = new ImplicitResourceDetails()
 		resource.setAuthenticationScheme(AuthenticationScheme.header)
 		resource.setAccessTokenUri(authorizeUrl)
-		//resource.setAccessTokenUri(tokenUrl)
-		//resource.setUserAuthorizationUri(authorizeUrl)
+		resource.setUserAuthorizationUri(authorizeUrl);
 		resource.setClientId("themostuntrustedclientid")
 		resource.setClientSecret("themostuntrustedclientsecret")
-		resource.setGrantType("implicit")
 		resource.setScope(['read', 'write'])
-		resource.setPreEstablishedRedirectUri("http://localhost:8080/client/redirect")
 		resource
 	}
 
