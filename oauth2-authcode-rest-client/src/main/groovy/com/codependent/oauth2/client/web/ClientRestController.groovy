@@ -25,28 +25,14 @@ class ClientRestController {
 	@Autowired
 	private OAuth2RestTemplate restTemplate
 
-	@ExceptionHandler(UserRedirectRequiredException.class)
-	void userRedirectRequiredException(UserRedirectRequiredException ex, HttpServletResponse response){
-		println ex
-		String redirectUri = ex.getRedirectUri()
-		for(Entry<String, String> entry : ex.getRequestParams().entrySet()){
-			if(redirectUri.indexOf("?")==-1){
-				redirectUri += "?" + entry.getKey() + "=" + entry.getValue()
-			}else{
-				redirectUri += "&" + entry.getKey() + "=" + entry.getValue()
-			}
-		}
-		println 'Redirecting to: '+ redirectUri + "&" + ex.getStateKey() + "="+ ex.getStateToPreserve()
-		response.sendRedirect(redirectUri)
+	@GetMapping("/home")
+	def getHome(HttpSession session){
+		session.getId()
 	}
-		
+	
 	@GetMapping("/users")
 	def getUsers(HttpSession session){
 		println 'Session id: '+ session.getId()
-		//TODO Move to after authentication
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication()
-		restTemplate.getOAuth2ClientContext().getAccessTokenRequest().setAll(['username': auth.name, 'password': auth.credentials])
-		
 		HttpHeaders headers = new HttpHeaders()
 		ResponseEntity<List<String>> response = restTemplate.exchange('http://localhost:8081/users', HttpMethod.GET, null, new ParameterizedTypeReference<List<String>>(){}, [])
 		response.getBody()
@@ -56,10 +42,6 @@ class ClientRestController {
 	def getUsers(@RequestParam String user, HttpSession session){
 		println 'Session id: '+ session.getId()
 		try{
-			//TODO Move to after authentication
-			Authentication auth = SecurityContextHolder.getContext().getAuthentication()
-			restTemplate.getOAuth2ClientContext().getAccessTokenRequest().setAll(['username': auth.name, 'password': auth.credentials])
-			
 			HttpHeaders headers = new HttpHeaders()
 			ResponseEntity<List<String>> response = restTemplate.exchange('http://localhost:8081/users/'+user, HttpMethod.PUT, null, new ParameterizedTypeReference<List<String>>(){}, [])
 			response.getBody()
