@@ -1,3 +1,7 @@
+spring:
+  thymeleaf:
+    cache: false
+
 server:
   context-path: /api
 

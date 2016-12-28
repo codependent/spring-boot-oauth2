@@ -1,0 +1,11 @@
+<html>
+	<body>
+		<form id="form" action="/api/accessTokenExtractor" method="POST">
+			<input type="hidden" id="hash" name="hash"/>
+		</form>
+		<script>
+			document.getElementById("hash").value = window.location.hash;
+			document.getElementById("form").submit();
+		</script>
+	</body>
+</html>

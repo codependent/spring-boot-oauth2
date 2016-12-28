@@ -36,7 +36,7 @@ class ClientRestController {
 		
 		//TODO Move to after authentication
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication()
-		restTemplate.getOAuth2ClientContext().getAccessTokenRequest().setAll(['client_id': 'themostuntrustedclientid', 'response_type': 'token', 'redirect_uri': 'http://localhost:8080/api/users'])
+		restTemplate.getOAuth2ClientContext().getAccessTokenRequest().setAll(['client_id': 'themostuntrustedclientid', 'response_type': 'token', 'redirect_uri': 'http://localhost:8080/api/accessTokenExtractor'])
 		
 		HttpHeaders headers = new HttpHeaders()
 		ResponseEntity<List<String>> response = restTemplate.exchange('http://localhost:8081/users', HttpMethod.GET, null, new ParameterizedTypeReference<List<String>>(){}, [])
