@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestParam
 
 @Controller
-class AccessTokenExtractor {
+class AccessTokenExtractorController {
 
 	@Autowired
 	private OAuth2ClientContext oauth2ClientContext

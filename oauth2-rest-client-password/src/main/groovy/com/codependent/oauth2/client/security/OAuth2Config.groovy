@@ -36,7 +36,7 @@ class OAuth2Config {
 		resource.setClientId("trustedclientid")
 		resource.setClientSecret("trustedclientsecret")
 		resource.setGrantType("password")
-		resource.setScope(['read'])
+		resource.setScope(['read_users', 'write_users'])
 		/*resource.setUsername("jose")
 		resource.setPassword("mypassword")*/
 		resource

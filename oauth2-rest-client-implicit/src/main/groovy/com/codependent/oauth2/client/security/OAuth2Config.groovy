@@ -33,7 +33,7 @@ class OAuth2Config {
 		resource.setUserAuthorizationUri(authorizeUrl);
 		resource.setClientId("themostuntrustedclientid")
 		resource.setClientSecret("themostuntrustedclientsecret")
-		resource.setScope(['read', 'write'])
+		resource.setScope(['read_users', 'write_users'])
 		resource
 	}
 

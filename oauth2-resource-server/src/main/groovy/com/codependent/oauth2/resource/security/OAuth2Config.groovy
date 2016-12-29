@@ -25,9 +25,9 @@ class OAuth2Config extends ResourceServerConfigurerAdapter{
 			.requestMatchers().antMatchers("/users/**")
 		.and()
 			.authorizeRequests()
-				.antMatchers(HttpMethod.GET, "/users").access("#oauth2.hasScope('read')")
-				.antMatchers(HttpMethod.PUT, "/users/**").access("#oauth2.hasScope('write')")
-				.antMatchers(HttpMethod.POST, "/users/**").access("#oauth2.hasScope('write')")
+				.antMatchers(HttpMethod.GET, "/users").access("#oauth2.hasScope('read_users')")
+				.antMatchers(HttpMethod.PUT, "/users/**").access("#oauth2.hasScope('write_users')")
+				.antMatchers(HttpMethod.POST, "/users/**").access("#oauth2.hasScope('write_users')")
 		/* Examples:
 		   .and()
 				.authorizeRequests()
