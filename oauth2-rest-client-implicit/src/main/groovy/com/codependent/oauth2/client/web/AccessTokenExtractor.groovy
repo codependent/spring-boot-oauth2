@@ -21,12 +21,13 @@ class AccessTokenExtractor {
 	}
 	
 	@PostMapping("/accessTokenExtractor")
-	void accessTokenExtractorPage(@RequestParam String hash){
+	def accessTokenExtractorPage(@RequestParam String hash){
 		println hash
 		println oauth2ClientContext.getAccessTokenRequest().getPreservedState()
 		println oauth2ClientContext.getAccessTokenRequest().getCurrentUri()
 		OAuth2AccessToken accessToken = new DefaultOAuth2AccessToken(hash.substring(hash.indexOf('=')+1, hash.indexOf('&'))) 
 		oauth2ClientContext.setAccessToken(accessToken)
+		'redirect:/home'
 	}
 	
 }

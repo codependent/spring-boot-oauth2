@@ -26,11 +26,6 @@ class ClientRestController {
 		ex
 	}
 	
-	@GetMapping("/home")
-	def getHome(HttpSession session){
-		session.getId()
-	}
-	
 	@GetMapping("/users")
 	def getUsers(HttpSession session){
 		println 'Session id: '+ session.getId()

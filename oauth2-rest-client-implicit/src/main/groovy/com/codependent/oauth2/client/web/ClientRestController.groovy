@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.oauth2.client.OAuth2RestTemplate
 import org.springframework.security.oauth2.common.exceptions.InsufficientScopeException
+import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
@@ -21,13 +22,9 @@ class ClientRestController {
 	@Autowired
 	private OAuth2RestTemplate restTemplate
 	
+	@ExceptionHandler(InsufficientScopeException.class)
 	def exceptionHandler(InsufficientScopeException ex){
 		ex
-	}
-	
-	@GetMapping("/home")
-	def getHome(HttpSession session){
-		session.getId()
 	}
 	
 	@GetMapping("/users")
