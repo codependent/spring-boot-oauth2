@@ -9,8 +9,10 @@ URL: `http://localhost:8082`
 URL: `http://localhost:8081`
 
 ## Clients
-All clients have a login form to access
+All clients have a login form to access:
+
 user: jose
+
 password: mypassword
 
 ###oauth2-rest-client-authcode
