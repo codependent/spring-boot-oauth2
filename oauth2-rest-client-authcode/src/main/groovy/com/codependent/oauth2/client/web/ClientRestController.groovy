@@ -11,6 +11,7 @@ import org.springframework.security.oauth2.client.OAuth2RestTemplate
 import org.springframework.security.oauth2.common.exceptions.InsufficientScopeException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
@@ -36,6 +37,13 @@ class ClientRestController {
 		HttpHeaders headers = new HttpHeaders()
 		ResponseEntity<List<String>> response = restTemplate.exchange('http://localhost:8081/users', HttpMethod.GET, null, new ParameterizedTypeReference<List<String>>(){}, [])
 		response.getBody()
+	}
+	
+	@PostMapping("/users")
+	def postUser(){
+		println 'Session id: '+ session.getId()
+		HttpHeaders headers = new HttpHeaders()
+		ResponseEntity<List<String>> response = restTemplate.exchange('http://localhost:8081/users', HttpMethod.POST, null, new ParameterizedTypeReference<List<String>>(){}, [])
 	}
 	
 	@GetMapping("/users/update")
