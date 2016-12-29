@@ -21,6 +21,7 @@ class OAuth2Config extends AuthorizationServerConfigurerAdapter{
 	@Autowired
 	private AuthenticationManager authenticationManager
 	
+	/*
 	@Bean
 	public UserDetailsService userDetailsService() throws Exception {
 		InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager([])
@@ -28,6 +29,7 @@ class OAuth2Config extends AuthorizationServerConfigurerAdapter{
 		manager.createUser(new User("themostuntrustedclientid","themostuntrustedclientsecret", [new SimpleGrantedAuthority("ROLE_USER")]))
 		return manager
 	}
+	*/
 	
 	@Bean
 	public TokenStore tokenStore() {
