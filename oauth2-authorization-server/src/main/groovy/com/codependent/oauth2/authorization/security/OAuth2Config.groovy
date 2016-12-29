@@ -45,7 +45,7 @@ class OAuth2Config extends AuthorizationServerConfigurerAdapter{
 			.secret("trustedclientsecret")
             .authorizedGrantTypes("password")
             .authorities("ROLE_USER")
-            .scopes("read_users")
+            .scopes("read_users", "write_users")
             .accessTokenValiditySeconds(60)
 		.and()
 		.withClient("untrustedclientid")

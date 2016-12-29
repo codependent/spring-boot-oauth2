@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.oauth2.client.OAuth2ClientContext
 import org.springframework.stereotype.Controller
 import org.springframework.ui.ModelMap
-import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.RequestMapping
 
 @Controller
 class OAuthApprovalController {
@@ -14,7 +14,7 @@ class OAuthApprovalController {
 	@Autowired
 	private OAuth2ClientContext oauth2ClientContext
 	
-	@GetMapping("/oauth/confirm_access")
+	@RequestMapping("/oauth/confirm_access")
 	def confirmAccess(HttpServletRequest request, ModelMap model){
 		if (request.getAttribute("_csrf") != null) {
 			model.put("_csrf", request.getAttribute("_csrf"));
