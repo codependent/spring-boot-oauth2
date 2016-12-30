@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>Oauth2 Authorization Server</title>
+		<title>OAuth2 Authorization Server</title>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -17,7 +17,7 @@
 	            <span class="icon-bar"></span>
 	            <span class="icon-bar"></span>
 	          </button>
-	          <a class="navbar-brand" href="/">Oauth2 Authorization Server</a>
+	          <a class="navbar-brand" href="/">OAuth2 Authorization Server</a>
 	        </div>
 	        <div id="navbar" class="navbar-collapse collapse">
 	          <ul class="nav navbar-nav">
@@ -30,17 +30,23 @@
 	
 			<div class="row">
 				<div class="col12">
-					<form name='f' action='/oauth/authorize' method='POST' style="margin:0 auto; max-width:700px">
-						<h2><span style="font-weight:bold" th:text="${session.authorizationRequest.clientId}"></span> quiere hacer lo siguiente:</h2>
-						<div class="form-group" th:each="aScope : ${session.authorizationRequest.scope}">
-  							<div class="checkbox">
-  								<label><input type="checkbox" th:name="'scope.'+${aScope}" value="true"/><span th:text="#{'scope.'+${aScope}}"></span></label>
+					<form name='f' action='/login' method='POST' style="margin:0 auto; max-width:300px">
+						<h1>Login</h1>
+						<div class="form-group">
+							<div class="input-group">
+							  <span class="input-group-addon" id="basic-addon3">User</span>
+							  <input type="text" class="form-control" id="username" name="username" aria-describedby="basic-addon3"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="input-group">
+							  <span class="input-group-addon" id="basic-addon3">Password</span>
+							  <input type="password" class="form-control" id="password" name="password" aria-describedby="basic-addon3"/>
 							</div>
   						</div>
   						<div class="form-group">
-  							<input type="submit" class="btn btn-success" value="Authorize"/>
+  							<input type="submit" class="btn btn-success" value="Login"/>
   						</div>
-  						<input name="user_oauth_approval" value="true" type="hidden"/>
   						<input type="hidden" th:name="${_csrf?.parameterName}" th:value="${_csrf?.token}" />
 					</form>
 				</div>

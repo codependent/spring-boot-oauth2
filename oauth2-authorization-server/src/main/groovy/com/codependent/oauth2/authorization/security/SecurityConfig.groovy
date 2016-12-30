@@ -25,11 +25,13 @@ class SecurityConfig extends WebSecurityConfigurerAdapter{
 			//
 			//XXX Si se usa implicit descomentar
 			.ignoringAntMatchers("/oauth/authorize")
-		.and()
+			.and()
 		.authorizeRequests()
-		.anyRequest().authenticated()
-		.and()
-		.httpBasic()
+			.anyRequest().authenticated()
+			.and()
+		//.httpBasic()
+		.formLogin()
+			.loginPage("/login").permitAll()
 	}
 	
 }
