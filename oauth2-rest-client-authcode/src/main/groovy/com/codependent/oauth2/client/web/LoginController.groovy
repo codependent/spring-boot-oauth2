@@ -8,12 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping
 @Controller
 class LoginController {
 
-	@Autowired
-	private OAuth2ClientContext oauth2ClientContext
-	
 	@GetMapping("/login")
-	void login(){
-		println 'login'
-	}
+	void login(){}
 	
 }

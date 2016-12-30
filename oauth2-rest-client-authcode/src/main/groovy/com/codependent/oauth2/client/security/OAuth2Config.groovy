@@ -1,18 +1,19 @@
 package com.codependent.oauth2.client.security
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.http.client.ClientHttpRequest
-import org.springframework.security.oauth2.client.DefaultOAuth2RequestAuthenticator
 import org.springframework.security.oauth2.client.OAuth2ClientContext
 import org.springframework.security.oauth2.client.OAuth2RestTemplate
 import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails
-import org.springframework.security.oauth2.client.token.grant.code.AuthorizationCodeResourceDetails;
-import org.springframework.security.oauth2.client.token.grant.password.ResourceOwnerPasswordResourceDetails
+import org.springframework.security.oauth2.client.token.AccessTokenProviderChain
+import org.springframework.security.oauth2.client.token.JdbcClientTokenServices;
+import org.springframework.security.oauth2.client.token.grant.code.AuthorizationCodeAccessTokenProvider
+import org.springframework.security.oauth2.client.token.grant.code.AuthorizationCodeResourceDetails
 import org.springframework.security.oauth2.common.AuthenticationScheme
-import org.springframework.security.oauth2.common.OAuth2AccessToken
 
 @Configuration
 class OAuth2Config {
@@ -28,6 +29,9 @@ class OAuth2Config {
 	
 	@Autowired
 	private OAuth2ClientContext oauth2Context
+	
+	@Autowired
+	private DataSource dataSource
 	
 	@Bean
 	OAuth2ProtectedResourceDetails resource() {
@@ -47,7 +51,15 @@ class OAuth2Config {
 	OAuth2RestTemplate restTemplate() {
 		OAuth2RestTemplate restTemplate = new OAuth2RestTemplate(resource(), oauth2Context)
 		//restTemplate.setAuthenticator(new ApiConnectOAuth2RequestAuthenticator())
+		AccessTokenProviderChain provider = new AccessTokenProviderChain(Arrays.asList(new AuthorizationCodeAccessTokenProvider()))
+		provider.setClientTokenServices(clientTokenServices())
+		restTemplate.setAccessTokenProvider(provider)
 		restTemplate
+	}
+	
+	@Bean
+	JdbcClientTokenServices clientTokenServices(){
+		new JdbcClientTokenServices(dataSource)
 	}
 	
 	/*
