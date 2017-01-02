@@ -40,6 +40,13 @@ class OAuth2Config extends AuthorizationServerConfigurerAdapter{
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 		clients.inMemory()
 		
+		.withClient("supertrustedclientid")
+			.secret("supertrustedclientsecret")
+			.authorizedGrantTypes("client_credentials")
+			.authorities("ROLE_USER")
+			.scopes("read_users", "write_users")
+			.accessTokenValiditySeconds(60)
+		.and()
 		//curl trustedclient:trustedclientsecret@localhost:8082/oauth/token -d grant_type=password -d username=user -d password=cec31d99-e5ee-4f1d-b9a3-8d16d0c6eeb5 -d scope=read
 		.withClient("trustedclientid")
 			.secret("trustedclientsecret")
