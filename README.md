@@ -26,3 +26,7 @@ URL: `http://localhost:8080/api/home`
 ###oauth2-rest-client-password
 Client for a Resource Owner Password flow.
 URL: `http://localhost:8080/api/home`
+
+###oauth2-rest-client-clientcredentials
+Client for a Client Credentials flow.
+URL: `http://localhost:8080/api/home`
