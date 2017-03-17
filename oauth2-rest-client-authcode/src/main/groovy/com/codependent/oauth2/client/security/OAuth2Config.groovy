@@ -52,7 +52,6 @@ class OAuth2Config {
 		OAuth2RestTemplate restTemplate = new OAuth2RestTemplate(resource(), oauth2Context)
 		//restTemplate.setAuthenticator(new ApiConnectOAuth2RequestAuthenticator())
 		AccessTokenProviderChain provider = new AccessTokenProviderChain(Arrays.asList(new AuthorizationCodeAccessTokenProvider()))
-		restTemplate.geta
 		provider.setClientTokenServices(clientTokenServices())
 		restTemplate.setAccessTokenProvider(provider)
 		restTemplate
